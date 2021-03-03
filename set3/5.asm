@@ -60,7 +60,7 @@ call linear_search
 
 call exit
 
-; this function counts the number of even numbers :::
+; this function does the linear search in the given array :::
 
 linear_search :
    pusha
