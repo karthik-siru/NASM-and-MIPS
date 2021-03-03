@@ -52,7 +52,7 @@ call seven_div_count
 
 call exit
 
-; this function counts the number of even numbers :::
+; this function counts the number of 7 multiples in the given array  :::
 
 seven_div_count :
    pusha
