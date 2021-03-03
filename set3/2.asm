@@ -3,12 +3,8 @@ section .data
  l1      : equ $-msg1
  msg2    : db "enter the digits :",10
  l2      : equ $-msg2
- msg3    : db "no. of even numbers :"
- l3      : equ $-msg3
- msg4    : db "no.of odd numbers :"
+ msg4    : db "numbers divisible by 7 in the given array :", 10
  l4      : equ $-msg4
- msg5    : db "check",10
- l5      : equ $-msg5
  newline : db 10
 
 section .bss
@@ -46,38 +42,19 @@ _start:
 
 call read_array
 
-call even_count
-
-mov ax , word[num1]
-mov word[num] , ax
-
-mov eax ,4
-mov ebx , 1
-mov ecx , msg3
-mov edx , l3
-int 80h
-
-call print_num
-
-mov ax , word[num1]
-mov bx , word[n]
-sub bx , ax
-
-mov word[num], bx
-
-mov eax ,4
+mov eax , 4
 mov ebx , 1
 mov ecx , msg4
 mov edx , l4
 int 80h
 
-call print_num
+call seven_div_count
 
 call exit
 
 ; this function counts the number of even numbers :::
 
-even_count :
+seven_div_count :
    pusha
 
    mov edx , 0
@@ -89,11 +66,14 @@ cmp_loop :
    cmp edx , dword[n]
    je end_cmp
    mov ax , word[ebx + 2*edx ]
-   mov cl , 2
+   mov cl , 7
    div cl
-   cmp ah , 1
-   je iterate
-   inc word[num1]
+   cmp ah , 0
+   jne iterate
+
+   mov ax , word[ebx + 2*edx ]
+   mov word[num], ax
+   call print_num
 
 iterate :
 

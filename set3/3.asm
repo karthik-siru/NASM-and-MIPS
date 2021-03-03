@@ -1,23 +1,19 @@
 section .data
  msg1    : db "enter the number of elements in the array :"
  l1      : equ $-msg1
- msg2    : db "enter the digits :",10
+ msg2    : db "enter the numbers :",10
  l2      : equ $-msg2
- msg3    : db "no. of even numbers :"
+ msg3    : db "sum  ::"
  l3      : equ $-msg3
- msg4    : db "no.of odd numbers :"
+ msg4    : db "integer-average ::"
  l4      : equ $-msg4
- msg5    : db "check",10
- l5      : equ $-msg5
  newline : db 10
 
 section .bss
   n    : resd 1
   num1 : resw 1
-  num2 : resw 1
   temp : resb 1
   num  : resw 1
-  nod  : resb 1
   count: resb 1
   array : resw 50
 
@@ -46,61 +42,54 @@ _start:
 
 call read_array
 
-call even_count
-
-mov ax , word[num1]
-mov word[num] , ax
-
-mov eax ,4
+mov eax , 4
 mov ebx , 1
 mov ecx , msg3
 mov edx , l3
 int 80h
 
-call print_num
-
-mov ax , word[num1]
-mov bx , word[n]
-sub bx , ax
-
-mov word[num], bx
-
-mov eax ,4
-mov ebx , 1
-mov ecx , msg4
-mov edx , l4
-int 80h
-
-call print_num
-
+call sum_avg
 call exit
 
 ; this function counts the number of even numbers :::
 
-even_count :
+sum_avg :
    pusha
 
    mov edx , 0
    mov ebx , array
    mov word[num1], 0
+   mov ax , 0
 
 cmp_loop :
 
    cmp edx , dword[n]
    je end_cmp
-   mov ax , word[ebx + 2*edx ]
-   mov cl , 2
-   div cl
-   cmp ah , 1
-   je iterate
-   inc word[num1]
-
-iterate :
-
-  inc edx
-  jmp cmp_loop
+   add ax , word[ebx + 2*edx ]
+   inc edx
+   jmp cmp_loop
 
 end_cmp :
+
+  mov word[num],ax
+  call print_num
+
+  pusha
+
+    mov eax , 4
+    mov ebx , 1
+    mov ecx , msg4
+    mov edx , l4
+    int 80h
+
+  popa
+
+  mov cl , byte[n]
+  div cl
+
+  mov byte[num],al
+
+  call print_num
 
   popa
   ret

@@ -1,11 +1,9 @@
 section .data
- msg1    : db "enter the number of elements in the array :"
- l1      : equ $-msg1
- msg2    : db "enter the digits :",10
+ msg2    : db "enter 10 numbers  :",10
  l2      : equ $-msg2
- msg3    : db "no. of even numbers :"
+ msg3    : db "largest number : "
  l3      : equ $-msg3
- msg4    : db "no.of odd numbers :"
+ msg4    : db "smallest number : "
  l4      : equ $-msg4
  msg5    : db "check",10
  l5      : equ $-msg5
@@ -25,17 +23,7 @@ section .text
 global _start:
 _start:
 
- mov eax , 4
- mov ebx , 1
- mov ecx , msg1
- mov edx , l1
- int 80h
-
- call read_num
-
- mov ax , word[num]
- mov word[n] , ax
-
+ mov word[n], 10
 
  mov eax , 4
  mov ebx , 1
@@ -46,61 +34,96 @@ _start:
 
 call read_array
 
-call even_count
-
-mov ax , word[num1]
-mov word[num] , ax
-
-mov eax ,4
-mov ebx , 1
-mov ecx , msg3
-mov edx , l3
-int 80h
-
-call print_num
-
-mov ax , word[num1]
-mov bx , word[n]
-sub bx , ax
-
-mov word[num], bx
-
-mov eax ,4
-mov ebx , 1
-mov ecx , msg4
-mov edx , l4
-int 80h
-
-call print_num
-
+call largest
+call smallest
 call exit
 
-; this function counts the number of even numbers :::
+; :this function , prints the largest number in the array :
 
-even_count :
+largest :
    pusha
-
    mov edx , 0
    mov ebx , array
-   mov word[num1], 0
+   mov ax, word[ebx]
+   mov word[num1] , ax
 
 cmp_loop :
 
    cmp edx , dword[n]
    je end_cmp
    mov ax , word[ebx + 2*edx ]
-   mov cl , 2
-   div cl
-   cmp ah , 1
-   je iterate
-   inc word[num1]
+   cmp ax , word[num1]
+   ja change
+   inc edx
+   jmp cmp_loop
 
-iterate :
-
+change :
+  mov ax , word[ebx+2*edx]
+  mov word[num1] , ax
   inc edx
   jmp cmp_loop
 
 end_cmp :
+
+  pusha
+
+  mov eax , 4
+  mov ebx , 1
+  mov ecx , msg3
+  mov edx , l3
+  int 80h
+
+  popa
+
+  mov ax, word[num1]
+  mov word[num] , ax
+
+  call print_num
+
+  popa
+  ret
+
+; smallest number function from here ::
+
+smallest :
+   pusha
+   mov edx , 0
+   mov ebx , array
+   mov ax, word[ebx]
+   mov word[num2],ax
+
+cmp_loop_s :
+
+   cmp edx , dword[n]
+   je end_cmp_s
+   mov ax , word[ebx + 2*edx ]
+   cmp ax , word[num2]
+   jb change_s
+   inc edx
+   jmp cmp_loop_s
+
+change_s :
+  mov ax , word[ebx+2*edx]
+  mov word[num2] , ax
+  inc edx
+  jmp cmp_loop
+
+end_cmp_s :
+
+  pusha
+
+  mov eax , 4
+  mov ebx , 1
+  mov ecx , msg4
+  mov edx , l4
+  int 80h
+
+  popa
+
+  mov ax, word[num2]
+  mov word[num] , ax
+
+  call print_num
 
   popa
   ret

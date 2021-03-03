@@ -3,11 +3,11 @@ section .data
  l1      : equ $-msg1
  msg2    : db "enter the digits :",10
  l2      : equ $-msg2
- msg3    : db "no. of even numbers :"
+ msg3    : db "found :)"
  l3      : equ $-msg3
- msg4    : db "no.of odd numbers :"
+ msg4    : db "not found  :(", 10
  l4      : equ $-msg4
- msg5    : db "check",10
+ msg5    : db "enter the number to be searched : ",10
  l5      : equ $-msg5
  newline : db 10
 
@@ -43,64 +43,65 @@ _start:
  mov edx , l2
  int 80h
 
-
 call read_array
 
-call even_count
-
-mov ax , word[num1]
-mov word[num] , ax
-
-mov eax ,4
+mov eax , 4
 mov ebx , 1
-mov ecx , msg3
-mov edx , l3
+mov ecx , msg5
+mov edx , l5
 int 80h
 
-call print_num
+call read_num
 
-mov ax , word[num1]
-mov bx , word[n]
-sub bx , ax
+mov ax , word[num]
+mov word[num2] , ax
 
-mov word[num], bx
-
-mov eax ,4
-mov ebx , 1
-mov ecx , msg4
-mov edx , l4
-int 80h
-
-call print_num
+call linear_search
 
 call exit
 
 ; this function counts the number of even numbers :::
 
-even_count :
+linear_search :
    pusha
 
    mov edx , 0
    mov ebx , array
-   mov word[num1], 0
+   mov cx , word[num2]
 
 cmp_loop :
 
    cmp edx , dword[n]
    je end_cmp
    mov ax , word[ebx + 2*edx ]
-   mov cl , 2
-   div cl
-   cmp ah , 1
+   cmp ax , cx
    je iterate
-   inc word[num1]
+   inc edx
+   jmp cmp_loop
 
 iterate :
 
-  inc edx
-  jmp cmp_loop
+   mov eax , 4
+   mov ebx , 1
+   mov ecx , msg3
+   mov edx , l3
+   int 80h
+
+   mov eax , 4
+   mov ebx , 1
+   mov ecx , newline
+   mov edx , 1
+   int 80h
+
+   jmp exit
 
 end_cmp :
+
+  mov eax , 4
+  mov ebx , 1
+  mov ecx , msg4
+  mov edx , l4
+  int 80h
 
   popa
   ret
