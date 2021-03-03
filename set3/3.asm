@@ -51,7 +51,7 @@ int 80h
 call sum_avg
 call exit
 
-; this function counts the number of even numbers :::
+; this function prints the sum and average of the given array :::
 
 sum_avg :
    pusha
