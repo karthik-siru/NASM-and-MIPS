@@ -3,8 +3,8 @@
 This repository contains solutions to practice questions given in HARDWARE_LAB - CSE -2021 , NIT CALICUT . 
 
  _____________________________________________________________________________________________________________________________________
- 
-                                           ## ARRAY AND NUMBERS . 
+
+## ARRAY AND NUMBERS . 
 
 1. [Program to find number of even and number of odd numbers in an array of length n.](https://github.com/karthik-siru/NASM/blob/main/set3/fst.asm)
 2. [Program to identify numbers in an array that are divisible by 7. ](https://github.com/karthik-siru/NASM/blob/main/set3/2.asm)
@@ -18,7 +18,7 @@ This repository contains solutions to practice questions given in HARDWARE_LAB -
 
 _______________________________________________________________________________________________________________________________________
 
-                                              ## STRING-HANDLING 
+## STRING-HANDLING 
                                               
 1. [program to check whether a string is a palindrome or not  ](https://github.com/karthik-siru/NASM/blob/main/set4/1.asm)
 2. [program to read a string and reverse it ](https://github.com/karthik-siru/NASM/blob/main/set4/2.asm)
@@ -29,7 +29,7 @@ ________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________________________
 
-                                             ## STRING-HANDLING-PRO 
+## STRING-HANDLING-PRO 
                                              
 1. [program to read a sentence with n words, interchange 1st and nth words, 2nd and n-1th word etc](https://github.com/karthik-siru/NASM/blob/main/set5/1.asm)
 2. [Find the Length of the Longest Repeating Sequence in a String](https://github.com/karthik-siru/NASM/blob/main/set5/2.asm)
@@ -39,30 +39,35 @@ ________________________________________________________________________________
 
 __________________________________________________________________________________________________________________________________________
 
-                                             ### Additional-Questions 
+### Additional-Questions 
                                              
-1.  [Replace a particular sub string in a given string ](https://github.com/karthik-siru/NASM/blob/main/set5/mod2.asm)
-    Ex :  No pain , No gain .... substring to be removed - 'in'
-    Output :  No pa , No gain
+1.  Remove the given substring in the given string <br>
+      Example :  
+   
+         No pain , No gain .... substring to be removed - 'in'
+         Output :  No pa , No gain
+     
+      [Source-code](https://github.com/karthik-siru/NASM/blob/main/set5/mod2.asm)
+    
 2.  Q: Given a string, that contains special characters together with alphabets (‘a’ to ‘z’ and
        ‘A’ to ‘Z’), reverse the string in a way that special characters are not affected. Treat all
        letters other than numbers (1-9) and characters (A-Z & a-z) as special characters.
-Example 1:
+    Example 1:
 
-    Input: str = "a,b$c"
-    Output: str = "c,b$a"
-    Note that $ and , are not moved anywhere.
-    Only subsequence "abc" is reversed
-Example 2:
+        Input: str = "a,b$c"
+        Output: str = "c,b$a"
+        Note that $ and , are not moved anywhere.
+        Only subsequence "abc" is reversed
+    Example 2:
 
-    Input: str = "Ab,c,de!$"
-    Output: str = "ed,c,bA!$"
+        Input: str = "Ab,c,de!$"
+        Output: str = "ed,c,bA!$"
     
   [Source-code](https://github.com/karthik-siru/NASM/blob/main/t2.asm)
   
 ______________________________________________________________________________________________________________________________________
   
-                                              # MIPS ::
+# MIPS ::
                                               
   1. [program to print first n Fibonacci numbers. Where n is the input.](https://github.com/karthik-siru/NASM/blob/main/MIPS/1.s)
   2. [Read two number and check whether they are twin prime or not. A twin prime is a prime number that is either 2 less or 2 more than another prime number - for example (41, 43).](https://github.com/karthik-siru/NASM/blob/main/MIPS/2.s)
