@@ -45,7 +45,7 @@ ________________________________________________________________________________
       Example :  
    
          No pain , No gain .... substring to be removed - 'in'
-         Output :  No pa , No gain
+         Output :  No pa , No ga
      
       [Source-code](https://github.com/karthik-siru/NASM/blob/main/set5/mod2.asm)
     
